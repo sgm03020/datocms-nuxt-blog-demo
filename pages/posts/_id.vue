@@ -25,7 +25,11 @@
               <div class="column is-8 is-offset-2">
                 <div class="content is-medium">
                   <h2 class="subtitle is-4">
-                    {{ formatDate(post.publicationDate) }}
+                    {{ formatDateJP(post.date).yyyymmdd }}
+                  <span class="is-size-6">
+                    {{ formatDateJP(post.date).yobi }}
+                  </span>
+                    <!-- {{ formatDate(post.publicationDate) }} -->
                   </h2>
                   <h1 class="title">
                     <nuxt-link :to="`/posts/${post.slug}`">{{
@@ -51,6 +55,8 @@ import { request, gql, imageFields, seoMetaTagsFields } from '~/lib/datocms'
 import { toHead } from 'vue-datocms'
 import format from 'date-fns/format'
 import parseISO from 'date-fns/parseISO'
+// 追加
+import ja from 'date-fns/locale/ja'
 
 export default {
   async asyncData({ params }) {
@@ -71,6 +77,7 @@ export default {
               id
               title
               slug
+              date
               publicationDate: _firstPublishedAt
               content {
                 value
@@ -128,6 +135,14 @@ export default {
   methods: {
     formatDate(date) {
       return format(parseISO(date), 'PPP')
+    },
+    // 独自追加
+    formatDateJP(date) {
+      let yobi = format(new Date(date), '（E曜日）', { locale: ja })
+      console.log('yobi: ', yobi)
+      let result = format(new Date(date), 'yyyy年MM月dd日', { locale: ja })
+      let rep = result.replace('年0', '年 ')
+      return { yyyymmdd: rep, yobi }
     },
     renderBlock: ({ record, h }) => {
       if (record.__typename === 'ImageBlockRecord') {
