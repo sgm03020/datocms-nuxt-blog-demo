@@ -35,7 +35,10 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    // ADD
+    // '@nuxtjs/style-resources',
+    'nuxt-fontawesome' // Imports FontAwesome 5 SVG icons
   ],
   /*
    ** Axios module configuration
@@ -57,5 +60,21 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
-  }
+  },
+  fontawesome: {
+    imports: [
+      {
+        set: '@fortawesome/free-solid-svg-icons', // Solid icons
+        icons: ['faCookieBite', 'faCommentDots', 'faEnvelope', 'faGrinWink', 'faHeart']
+      },
+      {
+        set: '@fortawesome/free-brands-svg-icons', // Brand icons
+        icons: ['faDev', 'faFacebook', 'faTwitter', 'faInstagram', 'faYoutube', 'faGithub']
+      },
+      {
+        set: '@fortawesome/free-regular-svg-icons', // Regular icons
+        icons: ['faClock', 'faCalendar']
+      }
+    ]
+  },
 }
