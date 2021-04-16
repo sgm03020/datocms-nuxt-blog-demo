@@ -3,8 +3,14 @@
     <section class="hero">
       <div class="hero-body">
         <div class="container">
-          <div v-for="post in posts.slice(0, 2)" v-bind:key="post.slug">
-            <div class="columns">
+          <!-- class追加 mb-5 -->
+          <div
+            v-for="post in posts.slice(0, 2)"
+            v-bind:key="post.slug"
+            class="mb-5"
+          >
+          <!-- mb-1追加 -->
+            <div class="columns mb-1">
               <div class="column is-8 is-offset-2">
                 <figure class="image">
                   <datocms-image :data="post.coverImage.responsiveImage" />
@@ -12,14 +18,19 @@
               </div>
             </div>
 
-            <section class="section">
+            <section class="section mx-0 my-0 px-0 py-0">
               <div class="columns">
                 <div class="column is-8 is-offset-2">
                   <div class="content is-medium">
-                    <h2 class="subtitle is-4">
+                    <h2 v-if="0" class="subtitle is-4">
                       {{ formatDate(post.publicationDate) }}
                     </h2>
-                    <h1 class="title">
+                    <h2 class="subtitle is-6 has-text-dark mb-0">
+                      <!-- {{ post.date }} -->
+                      {{ $formatDateJP(post.date).yyyymmdd }}
+                    </h2>
+                    <!-- <h1 class="title"> -->
+                    <h1 class="title is-5 mt-2 mb-3">
                       <nuxt-link :to="`/posts/${post.slug}`">{{
                         post.title
                       }}</nuxt-link>
@@ -30,6 +41,11 @@
               </div>
             </section>
 
+            <!-- 以下は yarn add @creativebulma/bulma-divider でインストール-->
+            <div>
+              <div class="divider">Next</div>
+            </div>
+            <!-- 以下はなぜか見えない -->
             <div class="is-divider" />
           </div>
         </div>
@@ -127,6 +143,7 @@ export default {
             id
             title
             slug
+            date
             publicationDate: _firstPublishedAt
             excerpt
             coverImage {

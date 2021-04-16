@@ -20,7 +20,16 @@
             </div>
           </div>
 
-          <section class="section">
+          <!-- テストセクション -->
+          <!-- <section class="section">
+            <div class="columns">
+              <div class="card-content">
+                This is Card
+              </div>
+            </div>
+          </section> -->
+          <!-- 追加 card mx-0 my-0 py-0 -->
+          <section class="section card mx-0 my-0 py-0">
             <div class="columns">
               <div class="column is-8 is-offset-2">
                 <!-- 移植 -->
@@ -28,6 +37,17 @@
                   class="columns mt-0 mb-0 is-vcentered"
                   style="line-height:1px"
                 >
+                <!-- タイトルをここへ持ってきた -->
+                  <div class="column is-narrow my-4 py-0">
+                    <h3 class="title is-size-4 mt-0 py-0">
+                      <nuxt-link
+                        :to="`/posts/${post.slug}`"
+                        class="has-text-dark"
+                        >{{ post.title }}</nuxt-link
+                      >
+                    </h3>
+                  </div>
+
                   <div class="column is-narrow pt-0">
                     <div class="columns is-mobile is-vcentered">
                       <div class="column is-narrow pr-0 is-flex">
@@ -99,7 +119,8 @@
                 </div>
 
                 <!-- ここまで -->
-                <div class="content is-medium">
+                <!-- 追加 px-2 py-2 (cardは上位に付けた) -->
+                <div class="px-2 py-2 content is-medium">
                   <!-- xxxx年 xx月 xx日表記 -->
                   <h2 v-if="0" class="is-size-6">
                     {{ formatDateJP(post.date).yyyymmdd }}
@@ -108,12 +129,15 @@
                     </span>
                     <!-- {{ formatDate(post.publicationDate) }} -->
                   </h2>
-                  <!--  -->
-                  <h1 class="title my-0 pb-2">
-                    <nuxt-link :to="`/posts/${post.slug}`">{{
-                      post.title
-                    }}</nuxt-link>
-                  </h1>
+                  <!-- h1 -> h2へ -->
+                  <!-- has-text-dark 追加 -->
+                  <h3 class="title mt-2 mb-4">
+                    <nuxt-link
+                      :to="`/posts/${post.slug}`"
+                      class="has-text-dark"
+                      >{{ post.title }}</nuxt-link
+                    >
+                  </h3>
                   <datocms-structured-text
                     :data="post.content"
                     :renderBlock="renderBlock"
@@ -138,6 +162,7 @@ import ja from 'date-fns/locale/ja'
 
 export default {
   async asyncData({ params }) {
+    // date追加
     if (params && params.id) {
       const data = await request({
         query: gql`
@@ -247,3 +272,12 @@ export default {
   }
 }
 </script>
+
+<style>
+.dummy-class {
+  font-size: 1rem;
+}
+/* .content.is-medium {
+    font-size: 1.1rem;
+} */
+</style>

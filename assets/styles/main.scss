@@ -1,0 +1,29 @@
+@import '~bulma/sass/utilities/initial-variables';
+@import '~bulma/sass/utilities/functions';
+
+// customize styles
+
+$black: #343434;
+$family-sans-serif: Avenir, sans-serif;
+
+// ここから追加
+// node_modules\bulma\sass\utilities\initial-variables.sass
+// $size-5: 1.25rem !default
+//\node_modules\bulma\sass\utilities\derived-variables.sass
+// $size-medium: $size-5 !default
+$size-medium: 1.1rem;
+// https://bulma.io/documentation/customize/variables/
+// \node_modules\bulma\sass\base\generic.sass
+// $body-line-height: 1.5 !default
+$body-line-height: 1.3;
+//
+// $divider-color: $grey-light;
+// 以下効かない
+$divider-color: red;
+$divider-thickness:	.5rem;
+
+@import '~bulma';
+
+// Bulma Dividerのためにインストール
+// yarn add @creativebulma/bulma-divider
+@import '~@creativebulma/bulma-divider';
