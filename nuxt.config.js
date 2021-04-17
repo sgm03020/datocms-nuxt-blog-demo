@@ -71,7 +71,8 @@ export default {
           'faCommentDots',
           'faEnvelope',
           'faGrinWink',
-          'faHeart'
+          'faHeart',
+          'faTag',
         ]
       },
       {

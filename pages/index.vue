@@ -85,7 +85,7 @@
 
     <!-- Articles -->
 
-    <section class="hero ">
+    <section v-if="posts && posts.length > 0" class="hero">
       <div class="hero-body">
         <div class="container">
           <div

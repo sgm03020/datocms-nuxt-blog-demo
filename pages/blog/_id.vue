@@ -9,6 +9,7 @@
         <nuxt-link :to="`/`">ホームへ</nuxt-link>
       </h1>
     </div>
+
     <section v-else class="section has-background-light">
       <div class="columns">
         <div class="column is-8 is-offset-2 card has-background-info">
@@ -26,9 +27,6 @@
                 }}</nuxt-link>
               </h3>
               <!--          -->
-              <!-- タグ -->
-              <!-- <button @click="info">タグ</button> -->
-              <!--      -->
               <div
                 class="columns mt-4 mb-0 is-vcentered"
                 style="line-height:1px"
@@ -56,13 +54,7 @@
                       />
                     </div>
                     <ul class="tags column pl-0">
-                      <li v-for="el in post.searchtags" class="tag is-light" :key="el.name">
-                        <!-- <a class="has-text-dark" :href="`/tags/${el.name}/`"
-                          >{{el.name}}</a
-                        > -->
-                        <span class="has-text-dark">{{el.name}}</span>
-                      </li>
-                      <!-- <li class="tag is-light">
+                      <li class="tag is-light">
                         <a class="has-text-dark" href="/tags/Development/"
                           >Development</a
                         >
@@ -72,7 +64,7 @@
                       </li>
                       <li class="tag is-light">
                         <a class="has-text-dark" href="/tags/Bulma/">Bulma</a>
-                      </li> -->
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -80,8 +72,7 @@
               <!-- 本文 -->
               <div class="columns">
                 <div class="column is-8 is-offset-2">
-                  <!-- is-medium -->
-                  <div class="my-2 px-2 py-2 content">
+                  <div class="my-2 px-2 py-2 content is-medium">
                     <datocms-structured-text
                       :data="post.content"
                       :renderBlock="renderBlock"
@@ -98,13 +89,34 @@
           </div>
         </div>
       </div>
+
+      <div v-if="0" class="container mt-0 pt-0 has-background-info">
+        <div class="columns mt-0 pt-0">
+          <div class="column is-8 is-offset-2 mt-0 pt-0">
+            <figure class="image">
+              <datocms-image :data="post.coverImage.responsiveImage" />
+            </figure>
+          </div>
+        </div>
+        <div class="columns mx-2 has-background-success">
+          <div class="column is-8 is-offset-2">
+            This is columns This is columnsThis is columnsThis is columnsThis is
+            columnsThis is columnsThis is columnsThis is columnsThis is
+            columnsThis is columnsThis is columnsThis is columnsThis is
+            columnsThis is columnsThis is columnsThis is columnsThis is
+            columnsThis is columnsThis is columns
+          </div>
+        </div>
+      </div>
     </section>
-    <!-- 前の書き方 -->
-    <section v-if="0" class="hero">
+
+    <!-- 追加: mx-0 my-0 px-0 py-0 -->
+    <section v-if="0" class="hero has-background-light">
       <div class="hero-body">
         <div class="container">
           <div class="columns">
-            <div class="column is-8 is-offset-2">
+            <!-- 追加: mx-0 my-0 px-0 py-0 -->
+            <div class="column is-8 is-offset-2 my-0 py-0">
               <!-- is-128x128 -->
               <figure class="image">
                 <datocms-image :data="post.coverImage.responsiveImage" />
@@ -121,8 +133,82 @@
               </div>
             </div>
           </section> -->
+          <!--                 -->
+          <!-- テストセクション -->
+          <!--                 -->
+          <!-- px-0 -> px-4 -->
+          <!-- has-background-light -->
+          <section class="section px-4 py-0">
+            <div class="columns">
+              <!-- is-offset-2 (上のheroと合わせる) -->
+              <div class="column is-8 is-offset-2">
+                <!-- This is 長いタイトルが入った場合はどうなるのか調べて見よう -->
+                <h3 class="title is-size-4 mx-0 my-0 px-0 py-0">
+                  <nuxt-link
+                    :to="`/posts/${post.slug}`"
+                    class="has-text-dark"
+                    >{{ post.title }}</nuxt-link
+                  >
+                </h3>
+              </div>
+            </div>
+            <!-- START -->
+            <div class="columns mt-0 mb-0 is-vcentered" style="line-height:1px">
+              <!-- 追加: is-offset-2 -->
+              <div class="column is-narrow pt-0 is-offset-2">
+                <div class="columns is-mobile is-vcentered">
+                  <div class="column is-narrow pr-0 is-flex">
+                    <font-awesome-icon
+                      class="icon is-small mr-2"
+                      :icon="['far', 'calendar']"
+                    />
+                  </div>
+                  <time class="column pl-0 is-narrow" :datetime="post.date"
+                    ><span>{{ post.date }}</span></time
+                  >
+                </div>
+              </div>
+              <div class="column pt-0">
+                <div class="columns is-mobile is-vcentered">
+                  <div class="column is-narrow pr-0 is-flex">
+                    <font-awesome-icon
+                      class="icon is-small mr-2"
+                      :icon="['fas', 'tag']"
+                    />
+                  </div>
+                  <ul class="tags column pl-0">
+                    <li class="tag is-light">
+                      <a class="has-text-dark" href="/tags/Development/"
+                        >Development</a
+                      >
+                    </li>
+                    <li class="tag is-light">
+                      <a class="has-text-dark" href="/tags/Nuxt/">Nuxt</a>
+                    </li>
+                    <li class="tag is-light">
+                      <a class="has-text-dark" href="/tags/Bulma/">Bulma</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="columns">
+              <div class="column is-8 is-offset-2">
+                <div class="px-2 py-2 content is-medium">
+                  <datocms-structured-text
+                    :data="post.content"
+                    :renderBlock="renderBlock"
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- END -->
+          </section>
+          <!--   -->
+          <!--   -->
+          <!--   -->
           <!-- 追加 card mx-0 my-0 py-0 -->
-          <section class="section card mx-0 my-0 py-0">
+          <section v-if="0" class="section card mx-0 my-0 py-0">
             <div class="columns">
               <div class="column is-8 is-offset-2">
                 <!-- 移植 -->
@@ -257,7 +343,6 @@ import ja from 'date-fns/locale/ja'
 export default {
   async asyncData({ params }) {
     // date追加
-    // metadateのtags追加
     if (params && params.id) {
       const data = await request({
         query: gql`
@@ -276,18 +361,6 @@ export default {
               title
               slug
               date
-              singlelink {
-                name
-              }
-              tags {
-                name
-              }
-              category {
-                name
-              }
-              searchtags {
-                name
-              }
               publicationDate: _firstPublishedAt
               content {
                 value
@@ -346,13 +419,6 @@ export default {
     return {}
   },
   methods: {
-    info() {
-      // console.log('tags:', this.post.tags)
-      console.log('this.post.singlelink: ', this.post.singlelink)
-      console.log('this.post.tags: ', this.post.tags)
-      console.log('this.post.category: ', this.post.category)
-      console.log('this.post.searchtags: ', this.post.searchtags)
-    },
     formatDate(date) {
       return format(parseISO(date), 'PPP')
     },
@@ -394,9 +460,4 @@ export default {
 /* .content.is-medium {
     font-size: 1.1rem;
 } */
-/* datoCMSのスタイル上書き */
-mark {
-  background-color: #bbb;
-  padding: 2px 4px;
-}
 </style>

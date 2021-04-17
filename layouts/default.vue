@@ -9,11 +9,17 @@
           <div
             class="navbar-brand navbar-item is-size-4 is-outlined has-text-weight-semibold"
           >
-            <a
+            <!-- <a
               href="https://over-road.com/"
               class="button is-primary is-outlined"
             >
               WEBサイトへ
+            </a> -->
+            <a
+              href="/"
+              class="button is-primary is-outlined"
+            >
+              Home
             </a>
           </div>
           <span class="navbar-burger burger" v-on:click="toggleNavbar">
@@ -38,13 +44,18 @@
     <nuxt />
 
     <footer class="footer">
-      <div class="content has-text-centered">
+      <!-- <div class="content has-text-centered">
         <p>
           <strong>Bulma - Blog theme</strong> by
           <a href="https://gonzalojs.com">Gonzalo Gutierrez</a>. Based on the
           <a href="http://jigsaw-blog-staging.tighten.co/">jigsaw-blog</a>. The
           source code is licensed
           <a href="http://opensource.org/licenses/mit-license.php">MIT</a>
+        </p>
+      </div> -->
+      <div class="content has-text-centered">
+        <p>
+          <strong>Nuxt + Bulma Blog </strong> by Tsuyoshi Koike
         </p>
       </div>
     </footer>
