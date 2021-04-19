@@ -1,0 +1,186 @@
+<template>
+  <div>
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container">
+          <!-- class追加 mb-5 -->
+          <!-- posts -> portfolioへ変更 -->
+          <div
+            v-for="post in portfolio.slice(0, 2)"
+            v-bind:key="post.slug"
+            class="mb-5"
+          >
+          <!-- mb-1追加 -->
+            <div class="columns mb-1">
+              <div class="column is-8 is-offset-2">
+                <figure class="image">
+                  <datocms-image :data="post.coverImage.responsiveImage" />
+                </figure>
+              </div>
+            </div>
+
+            <section class="section mx-0 my-0 px-0 py-0">
+              <div class="columns">
+                <div class="column is-8 is-offset-2">
+                  <div class="content is-medium">
+                    <h2 v-if="0" class="subtitle is-4">
+                      {{ formatDate(post.publicationDate) }}
+                    </h2>
+                    <h2 class="subtitle is-6 has-text-dark mb-0">
+                      <!-- {{ post.date }} -->
+                      {{ $formatDateJP(post.date).yyyymmdd }}
+                    </h2>
+                    <!-- <h1 class="title"> -->
+                    <h1 class="title is-5 mt-2 mb-3">
+                      <nuxt-link :to="`/portfolio/${post.slug}`">{{
+                        post.title
+                      }}</nuxt-link>
+                    </h1>
+                    <div v-html="post.excerpt" />
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- 以下は yarn add @creativebulma/bulma-divider でインストール-->
+            <div>
+              <div class="divider">Next</div>
+            </div>
+            <!-- 以下はなぜか見えない -->
+            <div class="is-divider" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- newsletter -->
+    <section class="section">
+      <div class="columns">
+        <div class="column is-10 is-offset-1">
+          <div class="container has-text-centered is-fluid">
+            <div class="hero is-light">
+              <div class="hero-body">
+                <h2 class="title is-4">Sign up for our newsletter</h2>
+                <div class="column is-6 is-offset-3">
+                  <div class="field has-addons has-addons-centered">
+                    <div class="control is-expanded">
+                      <input
+                        class="input"
+                        type="text"
+                        placeholder="Email address"
+                      />
+                    </div>
+                    <div class="control">
+                      <a class="button is-info">
+                        Subscribe
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Articles -->
+
+    <section v-if="portfolio && portfolio.length > 0" class="hero">
+      <div class="hero-body">
+        <div class="container">
+          <div
+            v-for="group in Math.ceil((portfolio.length - 2) / 2)"
+            v-bind:key="group"
+          >
+            <section class="section">
+              <div class="columns is-variable is-8">
+                <div
+                  v-for="(post, index) in portfolio.slice(group * 2, group * 2 + 2)"
+                  v-bind:key="post.slug"
+                  :class="['column is-5', index === 0 && 'is-offset-1']"
+                >
+                  <div class="content is-medium">
+                    <h2 class="subtitle is-5 has-text-grey">
+                      {{ formatDate(post.publicationDate) }}
+                    </h2>
+                    <h1 class="title has-text-black is-3">
+                      <nuxt-link :to="`/portfolio/${post.slug}`">{{
+                        post.title
+                      }}</nuxt-link>
+                    </h1>
+                    <div class="has-text-dark" v-html="post.excerpt" />
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <div class="is-divider" />
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</template>
+
+<script>
+import { request, gql, imageFields, seoMetaTagsFields } from '~/lib/datocms'
+import { toHead } from 'vue-datocms'
+import format from 'date-fns/format'
+import parseISO from 'date-fns/parseISO'
+
+export default {
+  async asyncData({ params }) {
+    const data = await request({
+      query: gql`
+        {
+          site: _site {
+            favicon: faviconMetaTags {
+              ...seoMetaTagsFields
+            }
+          }
+
+          portfolio: allPosts(first: 10, orderBy: _firstPublishedAt_DESC) {
+            id
+            title
+            slug
+            date
+            publicationDate: _firstPublishedAt
+            excerpt
+            coverImage {
+              responsiveImage(imgixParams: { fit: crop, ar: "16:9", w: 860 }) {
+                ...imageFields
+              }
+            }
+            author {
+              name
+              picture {
+                responsiveImage(imgixParams: { fit: crop, ar: "1:1", w: 40 }) {
+                  ...imageFields
+                }
+              }
+            }
+          }
+        }
+
+        ${imageFields}
+        ${seoMetaTagsFields}
+      `
+    })
+
+    return { ready: !!data, ...data }
+  },
+  methods: {
+    formatDate(date) {
+      return format(parseISO(date), 'PPP')
+    }
+  },
+  head() {
+    if (!this.ready) {
+      return
+    }
+
+    return toHead(this.site.favicon)
+  }
+}
+</script>
