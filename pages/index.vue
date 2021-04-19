@@ -5,7 +5,7 @@
         <div class="container">
           <!-- class追加 mb-5 -->
           <div
-            v-for="post in posts.slice(0, 2)"
+            v-for="post in portfolio.slice(0, 2)"
             v-bind:key="post.slug"
             class="mb-5"
           >
@@ -31,7 +31,7 @@
                     </h2>
                     <!-- <h1 class="title"> -->
                     <h1 class="title is-5 mt-2 mb-3">
-                      <nuxt-link :to="`/posts/${post.slug}`">{{
+                      <nuxt-link :to="`/portfolio/${post.slug}`">{{
                         post.title
                       }}</nuxt-link>
                     </h1>
@@ -85,17 +85,17 @@
 
     <!-- Articles -->
 
-    <section v-if="posts && posts.length > 0" class="hero">
+    <section v-if="portfolio && portfolio.length > 0" class="hero">
       <div class="hero-body">
         <div class="container">
           <div
-            v-for="group in Math.ceil((posts.length - 2) / 2)"
+            v-for="group in Math.ceil((portfolio.length - 2) / 2)"
             v-bind:key="group"
           >
             <section class="section">
               <div class="columns is-variable is-8">
                 <div
-                  v-for="(post, index) in posts.slice(group * 2, group * 2 + 2)"
+                  v-for="(post, index) in portfolio.slice(group * 2, group * 2 + 2)"
                   v-bind:key="post.slug"
                   :class="['column is-5', index === 0 && 'is-offset-1']"
                 >
@@ -104,7 +104,7 @@
                       {{ formatDate(post.publicationDate) }}
                     </h2>
                     <h1 class="title has-text-black is-3">
-                      <nuxt-link :to="`/posts/${post.slug}`">{{
+                      <nuxt-link :to="`/portfolio/${post.slug}`">{{
                         post.title
                       }}</nuxt-link>
                     </h1>
@@ -139,7 +139,7 @@ export default {
             }
           }
 
-          posts: allPosts(first: 10, orderBy: _firstPublishedAt_DESC) {
+          portfolio: allPosts(first: 10, orderBy: _firstPublishedAt_DESC) {
             id
             title
             slug
