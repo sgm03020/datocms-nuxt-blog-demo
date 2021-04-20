@@ -56,11 +56,15 @@
                       />
                     </div>
                     <ul class="tags column pl-0">
-                      <li v-for="el in post.searchtags" class="tag is-light" :key="el.name">
+                      <li
+                        v-for="el in post.searchtags"
+                        class="tag is-light"
+                        :key="el.name"
+                      >
                         <!-- <a class="has-text-dark" :href="`/tags/${el.name}/`"
                           >{{el.name}}</a
                         > -->
-                        <span class="has-text-dark">{{el.name}}</span>
+                        <span class="has-text-dark">{{ el.name }}</span>
                       </li>
                       <!-- <li class="tag is-light">
                         <a class="has-text-dark" href="/tags/Development/"
@@ -78,17 +82,17 @@
                 </div>
               </div>
               <!-- 本文 -->
-              <div class="columns">
-                <div class="column is-8 is-offset-2">
-                  <!-- is-medium -->
-                  <div class="my-2 px-2 py-2 content">
-                    <datocms-structured-text
-                      :data="post.content"
-                      :renderBlock="renderBlock"
-                    />
-                  </div>
-                </div>
+              <!-- <div class="columns"> -->
+              <!-- <div class="column is-8 is-offset-2"> -->
+              <!-- is-medium -->
+              <div class="my-2 px-2 py-2 content">
+                <datocms-structured-text
+                  :data="post.content"
+                  :renderBlock="renderBlock"
+                />
               </div>
+              <!-- </div> -->
+              <!-- </div> -->
               <!-- This is columns This is columnsThis is columnsThis is columnsThis
               is columnsThis is columnsThis is columnsThis is columnsThis is
               columnsThis is columnsThis is columnsThis is columnsThis is
