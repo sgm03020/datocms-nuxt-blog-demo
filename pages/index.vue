@@ -53,7 +53,7 @@
     </section>
 
     <!-- newsletter -->
-    <section class="section">
+    <section v-if="0" class="section">
       <div class="columns">
         <div class="column is-10 is-offset-1">
           <div class="container has-text-centered is-fluid">
