@@ -9,8 +9,10 @@
         <nuxt-link :to="`/`">ホームへ</nuxt-link>
       </h1>
     </div>
-    <section v-else class="section has-background-light">
+    <!-- mx-0 px-0  -->
+    <section v-else class="section has-background-light mx-0 px-0">
       <div class="columns">
+        <!--  -->
         <div class="column is-8 is-offset-2 card has-background-info">
           <div class="columns">
             <figure class="image">
